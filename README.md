@@ -1,8 +1,14 @@
 # pmean
 
+![Version](https://img.shields.io/badge/version-1.1.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Stata](https://img.shields.io/badge/Stata-17+-orange)
+![Status](https://img.shields.io/badge/status-active-success)
+[![Install](https://img.shields.io/badge/install-pmean-blue)](https://raw.githubusercontent.com/ahmadNJU/stata-pmean/main/)
+
 `pmean` is a Stata command for computing panel means and performing within–between decomposition in a unified and efficient framework.
 
-It is designed for applied panel data analysis in economics and related fields.
+It is designed for applied panel data analysis in economics and other social sciences fields.
 
 ---
 
