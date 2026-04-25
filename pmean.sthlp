@@ -64,7 +64,7 @@ Department of Economics, University of Sahiwal, Sahiwal Pakistan
 If you use {cmd:pmean} in your research, please cite:
 
 {p 4 4 2}
-Nawaz, A. (2026). pmean: Stata command for panel means and decomposition. GitHub repository.
+Nawaz, A. (2026). pmean: Stata command for panel means and decomposition. GitHub repository. Available at: https://github.com/ahmadNJU/stata-pmean
 
 {title:Remarks}
 
