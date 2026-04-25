@@ -8,11 +8,11 @@
 
 `pmean` is a Stata command for computing panel means and performing within–between decomposition in a unified and efficient framework.
 
-It is designed for applied panel data analysis in economics and other social sciences fields.
+It is designed for applied panel data analysis in economics and related social sciences.
 
 ---
 
-## Features
+## 🔧 Features
 
 * Overall (pooled) mean
 * Cross-sectional (panel/id) mean
@@ -25,10 +25,11 @@ It is designed for applied panel data analysis in economics and other social sci
 * Generates labeled, publication-ready variables
 * Summary table output via `table` option
 * Export summary table using `save()`
+* Returns results via `r()` for programmatic use
 
 ---
 
-## Installation
+## 📦 Installation
 
 Install directly from GitHub:
 
@@ -44,15 +45,15 @@ net install pmean, from("https://raw.githubusercontent.com/ahmadNJU/stata-pmean/
 
 ---
 
-## Basic Syntax
+## 🚀 Basic Syntax
 
 ```stata
-pmean varlist, id(panel_id) time(time_id) [table save(filename)]
+pmean varlist, id(panel_id) time(time_id) [table save(filename) replace]
 ```
 
 ---
 
-## Example
+## 📊 Example
 
 ```stata
 sysuse auto, clear
@@ -62,21 +63,25 @@ gen year = 2000 + mod(_n,5)
 gen id = mod(_n,3)
 
 * Apply pmean
-pmean price mpg, id(id) time(year)
+pmean price mpg, id(id) time(year) replace
 
 * Display summary table
-pmean price mpg, id(id) time(year) table
+pmean price mpg, id(id) time(year) table replace
 
 * Save summary table
-pmean price mpg, id(id) time(year) table save(summary.csv)
+pmean price mpg, id(id) time(year) table save(summary.csv) replace
 
 * Inspect generated variables
 describe pm_*
+
+* Access returned results
+return list
+display r(overall_price)
 ```
 
 ---
 
-## Output Variables
+## 📈 Output Variables
 
 For each variable `x`, the command generates:
 
@@ -94,7 +99,7 @@ All variables are automatically labeled for clarity and direct interpretation.
 
 ---
 
-## Summary Table Output
+## 📊 Summary Table Output
 
 Using the `table` option displays a compact summary table:
 
@@ -105,7 +110,7 @@ pmean price, id(id) time(year) table
 The table includes:
 
 * Number of observations (N)
-* Mean, standard deviation
+* Mean and standard deviation
 * Minimum and maximum values
 * Number of panel units
 * Number of time periods
@@ -118,7 +123,29 @@ pmean price, id(id) time(year) table save(summary.csv)
 
 ---
 
-## Typical Use Cases
+## 📦 Stored Results
+
+`pmean` stores results in `r()`.
+
+Examples:
+
+```stata
+return list
+display r(overall_price)
+```
+
+Returned elements include:
+
+* `r(varlist)` — variables used
+* `r(id)` — panel identifier
+* `r(time)` — time variable
+* `r(prefix)` — prefix used for generated variables
+* `r(generated)` — list of generated variables
+* `r(overall_x)` — overall mean of variable `x`
+
+---
+
+## 🎓 Typical Use Cases
 
 * Panel data descriptive analysis
 * Within–between decomposition
@@ -129,7 +156,7 @@ pmean price, id(id) time(year) table save(summary.csv)
 
 ---
 
-## Repository Structure
+## 📁 Repository Structure
 
 ```
 stata-pmean/
@@ -139,6 +166,7 @@ stata-pmean/
 │── stata.toc
 │── README.md
 │── LICENSE
+│── CITATION.cff
 │
 ├── examples/
 ├── tests/
@@ -146,32 +174,34 @@ stata-pmean/
 
 ---
 
-## License
+## 📜 License
 
 This project is licensed under the MIT License.
 
 ---
 
-## Author
+## 👤 Author
 
 **Ahmad Nawaz**
 
-School of Economics, Department of Industrial Economics, Nanjing University, China
+School of Economics (Industrial Economics)
+Nanjing University, China
 
-Department of Economics, University of Sahiwal, Pakistan
+Department of Economics
+University of Sahiwal, Pakistan
 
 ---
 
-## Citation
+## 📌 Citation
 
 If you use this package in your research, please cite:
 
 Nawaz, A. (2026). *pmean: Stata command for panel means and decomposition*. GitHub repository.
-Available at: [https://github.com/ahmadNJU/stata-pmean](https://github.com/ahmadNJU/stata-pmean)
+Available at: https://github.com/ahmadNJU/stata-pmean
 
 ---
 
-## Contributing
+## ⭐ Contributing
 
 Feedback, suggestions, and contributions are welcome.
 Please use GitHub Issues to report bugs or request features.
