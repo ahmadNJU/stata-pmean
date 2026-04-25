@@ -17,6 +17,7 @@ It is designed for panel data analysis.
 * Two-way demeaned transformation (TWFE-style)
 * Supports multiple variables in a single call
 * Generates labeled, publication-ready variables
+* Summary table output (table option)
 
 ## Installation
 
