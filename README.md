@@ -95,7 +95,6 @@ stata-pmean/
 ├── tests/
 ```
 
----
 
 ## License
 
@@ -115,17 +114,6 @@ If you use this package in your research, please cite:
 Nawaz, A. (2026). *pmean: Stata command for panel means and decomposition*. GitHub repository.
 Available at: https://github.com/ahmadNJU/stata-pmean
 
-
-## Future Development
-
-Planned extensions include:
-
-* Mata-optimized (high-performance) version
-* Automated summary tables for publication
-* Visualization tools for panel decomposition
-* Integration with panel regression workflows
-
----
 
 ## Contributing
 
