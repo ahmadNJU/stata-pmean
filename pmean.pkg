@@ -1,4 +1,6 @@
 v 1.1.0
-d pmean - Panel means and decomposition command
+d pmean - Stata command for panel means and within-between decomposition
+d Author: Ahmad Nawaz
+d Repository: https://github.com/ahmadNJU/stata-pmean
 f pmean.ado
 f pmean.sthlp
