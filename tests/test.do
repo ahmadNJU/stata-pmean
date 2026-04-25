@@ -6,7 +6,7 @@ input id time x
 2 2 40
 end
 
-pmean x, id(id) time(time) table
+pmean x, id(id) time(time) table replace
 
 * Check generated variables
 assert pm_overall_x == 25
@@ -18,8 +18,10 @@ assert pm_timemean_x == 30 if time == 2
 * Check decomposition
 assert pm_within_id_x == -5 if id == 1 & time == 1
 assert pm_within_id_x == 5  if id == 1 & time == 2
+
 assert pm_between_id_x == -10 if id == 1
 assert pm_between_id_x == 10  if id == 2
+
 assert pm_between_time_x == -5 if time == 1
 assert pm_between_time_x == 5  if time == 2
 
@@ -30,7 +32,6 @@ assert pm_twfe_x == 0
 assert r(overall_x) == 25
 
 * Check save option
-pmean x, id(id) time(time) table save(test_summary.csv)
+pmean x, id(id) time(time) table save(test_summary.csv) replace
 confirm file test_summary.csv
-
 erase test_summary.csv
