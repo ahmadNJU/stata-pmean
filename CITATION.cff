@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+title: "pmean: Stata command for panel means and decomposition"
+message: "If you use this software, please cite it as below."
+type: software
+
+authors:
+  - family-names: Nawaz
+    given-names: Ahmad
+    affiliation: "School of Economics, Nanjing University, China; Department of Economics, University of Sahiwal, Sahiwal Pakistan"
+
+year: 2026
+version: "1.0.0"
+license: MIT
+repository-code: "https://github.com/ahmadNJU/stata-pmean"
+
+keywords:
+  - Stata
+  - panel data
+  - panel means
+  - within-between decomposition
+  - fixed effects
+  - applied econometrics
+
+abstract: "pmean is a Stata command for computing panel means and performing within-between decomposition for applied panel data analysis."
