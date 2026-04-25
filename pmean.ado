@@ -134,7 +134,9 @@ program define pmean, rclass
         postclose `results'
 
         preserve
-            use `summary_table', clear
+            quietly {
+                use `summary_table', clear
+            }
 
             format mean sd min max %12.4f
             format N panels periods %12.0f
