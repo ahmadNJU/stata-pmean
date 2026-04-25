@@ -12,7 +12,7 @@ It is designed for applied panel data analysis in economics and related social s
 
 ---
 
-## 🔧 Features
+## Features
 
 * Overall (pooled) mean
 * Cross-sectional (panel/id) mean
@@ -29,7 +29,7 @@ It is designed for applied panel data analysis in economics and related social s
 
 ---
 
-## 📦 Installation
+## Installation
 
 Install directly from GitHub:
 
@@ -45,7 +45,7 @@ net install pmean, from("https://raw.githubusercontent.com/ahmadNJU/stata-pmean/
 
 ---
 
-## 🚀 Basic Syntax
+## Basic Syntax
 
 ```stata
 pmean varlist, id(panel_id) time(time_id) [table save(filename) replace]
@@ -53,7 +53,7 @@ pmean varlist, id(panel_id) time(time_id) [table save(filename) replace]
 
 ---
 
-## 📊 Example
+## Example
 
 ```stata
 sysuse auto, clear
@@ -81,7 +81,7 @@ display r(overall_price)
 
 ---
 
-## 📈 Output Variables
+## Output Variables
 
 For each variable `x`, the command generates:
 
@@ -99,7 +99,7 @@ All variables are automatically labeled for clarity and direct interpretation.
 
 ---
 
-## 📊 Summary Table Output
+## Summary Table Output
 
 Using the `table` option displays a compact summary table:
 
@@ -123,7 +123,7 @@ pmean price, id(id) time(year) table save(summary.csv)
 
 ---
 
-## 📦 Stored Results
+## Stored Results
 
 `pmean` stores results in `r()`.
 
@@ -145,7 +145,7 @@ Returned elements include:
 
 ---
 
-## 🎓 Typical Use Cases
+## Typical Use Cases
 
 * Panel data descriptive analysis
 * Within–between decomposition
@@ -156,7 +156,7 @@ Returned elements include:
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 stata-pmean/
@@ -174,25 +174,25 @@ stata-pmean/
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under the MIT License.
 
 ---
 
-## 👤 Author
+## Author
 
 **Ahmad Nawaz**
 
-School of Economics (Industrial Economics)
-Nanjing University, China
+School of Economics
+Nanjing University, Nanjing China
 
 Department of Economics
-University of Sahiwal, Pakistan
+University of Sahiwal, Sahiwal Pakistan
 
 ---
 
-## 📌 Citation
+## Citation
 
 If you use this package in your research, please cite:
 
@@ -201,7 +201,7 @@ Available at: https://github.com/ahmadNJU/stata-pmean
 
 ---
 
-## ⭐ Contributing
+## Contributing
 
 Feedback, suggestions, and contributions are welcome.
 Please use GitHub Issues to report bugs or request features.
