@@ -1,4 +1,4 @@
-*! version 1.1.0  25apr2026  Ahmad Nawaz
+*! version 1.0.0  25apr2026  Ahmad Nawaz
 
 program define pmean, rclass
     version 17.0
