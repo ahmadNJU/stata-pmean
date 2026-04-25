@@ -2,7 +2,7 @@
 
 `pmean` is a Stata command for computing panel means and performing within–between decomposition in a unified and efficient framework.
 
-It is designed for panel data analysis.
+It is designed for applied panel data analysis in economics and related fields.
 
 ---
 
@@ -17,7 +17,10 @@ It is designed for panel data analysis.
 * Two-way demeaned transformation (TWFE-style)
 * Supports multiple variables in a single call
 * Generates labeled, publication-ready variables
-* Summary table output (table option)
+* Summary table output via `table` option
+* Export summary table using `save()`
+
+---
 
 ## Installation
 
@@ -33,11 +36,15 @@ To update the package:
 net install pmean, from("https://raw.githubusercontent.com/ahmadNJU/stata-pmean/main/") replace
 ```
 
+---
+
 ## Basic Syntax
 
 ```stata
-pmean varlist, id(panel_id) time(time_id)
+pmean varlist, id(panel_id) time(time_id) [table save(filename)]
 ```
+
+---
 
 ## Example
 
@@ -49,11 +56,19 @@ gen year = 2000 + mod(_n,5)
 gen id = mod(_n,3)
 
 * Apply pmean
-pmean price, id(id) time(year)
+pmean price mpg, id(id) time(year)
+
+* Display summary table
+pmean price mpg, id(id) time(year) table
+
+* Save summary table
+pmean price mpg, id(id) time(year) table save(summary.csv)
 
 * Inspect generated variables
 describe pm_*
 ```
+
+---
 
 ## Output Variables
 
@@ -71,6 +86,31 @@ For each variable `x`, the command generates:
 
 All variables are automatically labeled for clarity and direct interpretation.
 
+---
+
+## Summary Table Output
+
+Using the `table` option displays a compact summary table:
+
+```stata
+pmean price, id(id) time(year) table
+```
+
+The table includes:
+
+* Number of observations (N)
+* Mean, standard deviation
+* Minimum and maximum values
+* Number of panel units
+* Number of time periods
+
+To export the table:
+
+```stata
+pmean price, id(id) time(year) table save(summary.csv)
+```
+
+---
 
 ## Typical Use Cases
 
@@ -80,6 +120,8 @@ All variables are automatically labeled for clarity and direct interpretation.
 * Cross-country or regional comparisons
 * Environmental and energy datasets
 * Growth and convergence analysis
+
+---
 
 ## Repository Structure
 
@@ -96,29 +138,40 @@ stata-pmean/
 ├── tests/
 ```
 
+---
 
 ## License
 
-This project is licensed under the MIT License
+This project is licensed under the MIT License.
+
+---
 
 ## Author
 
 **Ahmad Nawaz**
 
-School of Economics, Department of Industrial Economics, Nanjing University, Mainland China
+School of Economics, Department of Industrial Economics
+Nanjing University, China
 
-Department of Economics, University of Sahiwal, Sahiwal Pakistan
+Department of Economics
+University of Sahiwal, Pakistan
 
+---
 
 ## Citation
 
 If you use this package in your research, please cite:
 
 Nawaz, A. (2026). *pmean: Stata command for panel means and decomposition*. GitHub repository.
-Available at: https://github.com/ahmadNJU/stata-pmean
+Available at: [https://github.com/ahmadNJU/stata-pmean](https://github.com/ahmadNJU/stata-pmean)
 
+---
 
 ## Contributing
 
 Feedback, suggestions, and contributions are welcome.
 Please use GitHub Issues to report bugs or request features.
+
+---
+
+Just say 👍
