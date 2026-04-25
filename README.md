@@ -179,5 +179,3 @@ Feedback, suggestions, and contributions are welcome.
 Please use GitHub Issues to report bugs or request features.
 
 ---
-
-Just say 👍
