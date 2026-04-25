@@ -156,13 +156,9 @@ This project is licensed under the MIT License.
 
 **Ahmad Nawaz**
 
-School of Economics, Department of Industrial Economics
+School of Economics, Department of Industrial Economics, Nanjing University, China
 
-Nanjing University, China
-
-Department of Economics
-
-University of Sahiwal, Pakistan
+Department of Economics, University of Sahiwal, Pakistan
 
 ---
 
