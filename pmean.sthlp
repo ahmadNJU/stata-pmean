@@ -41,8 +41,9 @@ The generated variables are automatically labeled for ease of interpretation and
 
 {p 4 4 2}
 Ahmad Nawaz  
-Lecturer in Economics  
-University of Sahiwal, Pakistan  
+School of Economics, Department of Industrial Economics, Nanjing University, Mainland China
+
+Department of Economics, University of Sahiwal, Sahiwal Pakistan 
 
 {title:Citation}
 
