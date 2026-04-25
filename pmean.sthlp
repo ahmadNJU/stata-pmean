@@ -12,18 +12,31 @@
 {title:Description}
 
 {p 4 4 2}
-{cmd:pmean} generates commonly used transformations for panel data analysis, including:
+{cmd:pmean} generates the following variables for each input variable:
 
-{p 8 8 2}- Overall (pooled) mean
-{p 8 8 2}- Cross-sectional (panel/id) mean
+{p 8 8 2}- Overall mean
+{p 8 8 2}- Panel (id) mean
 {p 8 8 2}- Time mean
-{p 8 8 2}- Within-panel deviation
+{p 8 8 2}- Within-panel deviation (from panel mean)
 {p 8 8 2}- Between-panel component
 {p 8 8 2}- Time-specific deviation
 {p 8 8 2}- Two-way demeaned variable (removing both panel and time effects)
 
 {p 4 4 2}
-The generated variables are automatically labeled for ease of interpretation and use in empirical analysis.
+All generated variables are automatically labeled for ease of interpretation.
+
+{title:Generated Variables}
+
+{p 4 4 2}
+For a variable {it:x}, the following variables are created:
+
+{p 8 8 2}{cmd:pm_overall_x}       Overall mean  
+{p 8 8 2}{cmd:pm_idmean_x}        Mean within panel units  
+{p 8 8 2}{cmd:pm_timemean_x}      Mean across time periods  
+{p 8 8 2}{cmd:pm_within_id_x}     Within-panel deviation  
+{p 8 8 2}{cmd:pm_between_id_x}    Between-panel component  
+{p 8 8 2}{cmd:pm_between_time_x}  Time-specific deviation  
+{p 8 8 2}{cmd:pm_twfe_x}          Two-way demeaned variable  
 
 {title:Example}
 
@@ -41,9 +54,8 @@ The generated variables are automatically labeled for ease of interpretation and
 
 {p 4 4 2}
 Ahmad Nawaz  
-School of Economics, Department of Industrial Economics, Nanjing University, Mainland China
-
-Department of Economics, University of Sahiwal, Sahiwal Pakistan 
+Lecturer in Economics  
+University of Sahiwal, Pakistan  
 
 {title:Citation}
 
@@ -51,9 +63,9 @@ Department of Economics, University of Sahiwal, Sahiwal Pakistan
 If you use {cmd:pmean} in your research, please cite:
 
 {p 4 4 2}
-Nawaz, A. (2026). pmean: Stata command for panel means and decomposition. GitHub repository. Available at: https://github.com/ahmadNJU/stata-pmean
+Nawaz, A. (2026). pmean: Stata command for panel means and decomposition. GitHub repository.
 
 {title:Remarks}
 
 {p 4 4 2}
-This command is intended for descriptive analysis and variable transformation in panel datasets, and can be used in conjunction with fixed-effects and related econometric models.
+The command is intended for descriptive analysis and transformation of panel data variables, and can be used in conjunction with fixed-effects models.
