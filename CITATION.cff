@@ -6,10 +6,11 @@ type: software
 authors:
   - family-names: Nawaz
     given-names: Ahmad
-    affiliation: "School of Economics, Nanjing University, China; Department of Economics, University of Sahiwal, Sahiwal Pakistan"
+    affiliation: "School of Economics, Nanjing University, China; Department of Economics, University of Sahiwal, Sahiwal 57000, Pakistan"
 
 year: 2026
-version: "1.1.0"
+version: "1.1.1"
+doi: "10.5281/zenodo.19752279"
 license: MIT
 repository-code: "https://github.com/ahmadNJU/stata-pmean"
 
