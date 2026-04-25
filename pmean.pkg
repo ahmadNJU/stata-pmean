@@ -1,4 +1,4 @@
-v 1
-d pmean
+v 1.0.0
+d pmean - Panel means and decomposition command
 f pmean.ado
 f pmean.sthlp
