@@ -1,6 +1,6 @@
 # pmean
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19752279.svg)](https://doi.org/10.5281/zenodo.19752279)
-![Version](https://img.shields.io/badge/version-1.1.0-blue)
+![Version](https://img.shields.io/badge/version-1.1.1-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Stata](https://img.shields.io/badge/Stata-17+-orange)
 ![Status](https://img.shields.io/badge/status-active-success)
