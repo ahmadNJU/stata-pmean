@@ -18,10 +18,12 @@
 For each numeric variable in {it:varlist}, it creates the overall mean, id mean, time mean,
 within-id deviation, between-id component, between-time component, and a two-way demeaned variable.
 
+
 {p 4 4 2}
 The command sample is defined by {it:if}, {it:in}, and observations with nonmissing values of
 {cmd:id()} and {cmd:time()}. Missing values of the analysis variables are handled variable by variable.
 Generated variables are missing outside the command sample.
+
 
 {title:Generated variables}
 
@@ -36,6 +38,7 @@ For a variable {it:x}, the default generated variables are:
 {p 8 8 2}{cmd:pm_between_time_x}  Time-specific deviation component
 {p 8 8 2}{cmd:pm_twfe_x}          Two-way demeaned variable
 
+
 {p 4 4 2}
 All generated variables are stored in double precision and labeled.
 
@@ -46,55 +49,70 @@ All generated variables are stored in double precision and labeled.
 Generated variable names are checked before any variables are created. If a name is too long or otherwise invalid,
 use a shorter prefix or rename the source variable.
 
+
 {p 4 4 2}
 {cmd:replace} allows {cmd:pmean} to overwrite previously generated variables with the same names.
 If {cmd:save()} is specified, {cmd:replace} also permits overwriting an existing CSV file.
+
 
 {p 4 4 2}
 {cmd:table} displays a compact summary table for each variable. The table reports N, mean, standard deviation,
 minimum, maximum, number of panel units, and number of time periods.
 
+
 {p 4 4 2}
 {cmd:save(}{it:filename}{cmd:)} saves the summary table as a CSV file. This option requires {cmd:table}.
 If the file already exists, specify {cmd:replace}.
+
 
 {title:Formula}
 
 {p 4 4 2}
 For variable {it:x}, the two-way demeaned variable is computed as
 
+
 {p 8 8 2}
 {it:x_it} - mean_i({it:x}) - mean_t({it:x}) + mean({it:x}).
+
 
 {p 4 4 2}
 This is a descriptive two-way demeaning formula. It is exact for balanced panels under the usual marginal-mean
 interpretation. In unbalanced panels, it should be interpreted as a descriptive transformation rather than a guaranteed
 replacement for full fixed-effects residualization.
 
+
 {title:Examples}
 
 {p 4 4 2}
 {cmd:. sysuse auto, clear}
 
+
 {p 4 4 2}
 {cmd:. gen year = 2000 + mod(_n, 5)}
+
 
 {p 4 4 2}
 {cmd:. gen id = mod(_n, 3)}
 
+
 {p 4 4 2}
 {cmd:. pmean price mpg, id(id) time(year) replace}
+
 
 {p 4 4 2}
 {cmd:. pmean price mpg, id(id) time(year) table save(pmean_summary.csv) replace}
 
+
 {p 4 4 2}
 {cmd:. return list}
 
+
 {title:Stored results}
+
 
 {p 4 4 2}
 {cmd:pmean} stores results in {cmd:r()}.
+
 
 {p 8 8 2}{cmd:r(varlist)}     Variables used
 {p 8 8 2}{cmd:r(id)}          Panel identifier
@@ -102,6 +120,7 @@ replacement for full fixed-effects residualization.
 {p 8 8 2}{cmd:r(prefix)}      Prefix used for generated variables
 {p 8 8 2}{cmd:r(generated)}   List of generated variables
 {p 8 8 2}{cmd:r(overall_x)}   Overall mean of variable {it:x}
+
 
 {title:Author}
 
