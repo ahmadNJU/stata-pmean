@@ -1,4 +1,7 @@
-clear
+version 17.0
+clear all
+set more off
+
 sysuse auto, clear
 
 * Create artificial panel structure
@@ -14,6 +17,7 @@ describe pm_*
 pmean price mpg weight, id(id) time(year) table replace
 
 * Save summary table
+capture erase pmean_summary.csv
 pmean price mpg, id(id) time(year) table save(pmean_summary.csv) replace
 
 * Check returned results
