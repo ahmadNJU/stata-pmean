@@ -1,2 +1,3 @@
-v 1
-p pmean
+v 3
+d pmean package
+p pmean Panel means and within-between decomposition
