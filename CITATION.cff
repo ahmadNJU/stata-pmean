@@ -3,7 +3,8 @@ message: "If you use this software, please cite it using the metadata from this 
 type: software
 title: "pmean: Stata command for panel means and decomposition"
 version: "1.2.0"
-date-released: "2026-04-27"
+date-released: "2026-04-28"
+doi: "10.5281/zenodo.19787933"
 
 authors:
   - family-names: Nawaz

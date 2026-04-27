@@ -1,5 +1,6 @@
 # pmean
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19787933.svg)](https://doi.org/10.5281/zenodo.19787933)
 ![Version](https://img.shields.io/badge/version-1.2.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Stata](https://img.shields.io/badge/Stata-17+-orange)
@@ -243,10 +244,15 @@ University of Sahiwal, Sahiwal Pakistan
 
 ## Citation
 
-If you use this package in your research, please cite:
+If you use this package in your research, please cite the version used in your analysis.
 
-Nawaz, A. (2026). *pmean: Stata command for panel means and decomposition*. GitHub repository.  
-Available at: https://github.com/ahmadNJU/stata-pmean
+For version 1.2.0:
+
+Nawaz, A. (2026). *pmean: Stata command for panel means and decomposition* (Version 1.2.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19787933
+
+Previous release:
+
+Nawaz, A. (2026). *pmean: Stata command for panel means and decomposition* (Version 1.1.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19752279
 
 ---
 
