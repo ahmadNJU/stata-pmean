@@ -1,109 +1,187 @@
+/********************************************************************
+  pmean test file
+  Version 2.0.0
+********************************************************************/
+
 version 17.0
 clear all
 set more off
+set seed 12345
 
-* Balanced panel checks
+*------------------------------------------------------------
+* 1. Backward-compatible two-dimensional formulas
+*------------------------------------------------------------
+
 clear
-input id time x z
-1 1 10 100
-1 2 20 120
-2 1 30 140
-2 2 40 160
+input id time x y
+1 1 10 1
+1 2 20 2
+2 1 30 3
+2 2 40 4
 end
 
-gen obsno = _n
+pmean x y, id(id) time(time) replace
+local mode = r(mode)
+local dims = r(dimensions)
 
-pmean x z, id(id) time(time) table replace
+assert abs(pm_overall_x - 25) < 1e-10
+assert abs(pm_idmean_x - 15) < 1e-10 if id == 1
+assert abs(pm_idmean_x - 35) < 1e-10 if id == 2
+assert abs(pm_timemean_x - 20) < 1e-10 if time == 1
+assert abs(pm_timemean_x - 30) < 1e-10 if time == 2
+assert abs(pm_within_id_x + 5) < 1e-10 if id == 1 & time == 1
+assert abs(pm_within_id_x - 5) < 1e-10 if id == 1 & time == 2
+assert abs(pm_between_id_x + 10) < 1e-10 if id == 1
+assert abs(pm_between_id_x - 10) < 1e-10 if id == 2
+assert abs(pm_between_time_x + 5) < 1e-10 if time == 1
+assert abs(pm_between_time_x - 5) < 1e-10 if time == 2
+assert abs(pm_twfe_x) < 1e-10
 
-assert obsno == _n
-
-assert pm_overall_x == 25
-assert pm_idmean_x == 15 if id == 1
-assert pm_idmean_x == 35 if id == 2
-assert pm_timemean_x == 20 if time == 1
-assert pm_timemean_x == 30 if time == 2
-
-assert pm_within_id_x == -5 if id == 1 & time == 1
-assert pm_within_id_x == 5  if id == 1 & time == 2
-
-assert pm_between_id_x == -10 if id == 1
-assert pm_between_id_x == 10  if id == 2
-
-assert pm_between_time_x == -5 if time == 1
-assert pm_between_time_x == 5  if time == 2
-
-assert pm_twfe_x == 0
-assert r(overall_x) == 25
-assert "`r(id)'" == "id"
-assert "`r(time)'" == "time"
-assert "`r(prefix)'" == "pm_"
-
-assert pm_overall_z == 130
-assert pm_idmean_z == 110 if id == 1
-assert pm_idmean_z == 150 if id == 2
+assert abs(pm_overall_y - 2.5) < 1e-10
+assert abs(pm_twfe_y) < 1e-10
+assert `dims' == 2
+assert "`mode'" == "2D"
 
 * Existing generated variables should require replace
 capture noisily pmean x, id(id) time(time)
 assert _rc == 110
 
-* save() must be used with table
-capture noisily pmean x, id(id) time(time) save(pmean_no_table.csv) replace
+* save() should require table
+capture noisily pmean x, id(id) time(time) save(pmean_should_not_exist.csv) replace
+assert _rc == 198
+capture erase pmean_should_not_exist.csv
+
+* full should require dim3()
+capture noisily pmean x, id(id) time(time) full replace
 assert _rc == 198
 
-* Exported table can be written with replace
-capture erase pmean_test_summary.csv
-pmean x, id(id) time(time) table save(pmean_test_summary.csv) replace
-confirm file pmean_test_summary.csv
-erase pmean_test_summary.csv
+*------------------------------------------------------------
+* 2. Three-dimensional main-effect decomposition
+*------------------------------------------------------------
 
-* Existing CSV file is not overwritten unless replace is specified
-file open fh using pmean_existing.csv, write replace
-file write fh "existing file" _n
-file close fh
-capture noisily pmean x, id(id) time(time) genprefix(qm_) table save(pmean_existing.csv)
-assert _rc != 0
-capture confirm variable qm_overall_x
-assert _rc != 0
-erase pmean_existing.csv
-
-* Long generated names should fail clearly
 clear
-set obs 2
-gen id = _n
-gen time = _n
-gen longvariablename123456 = _n
-capture noisily pmean longvariablename123456, id(id) time(time)
-assert _rc == 198
-
-* String identifiers, missing identifiers, missing values, and if restrictions
-clear
-input str1 id str1 time x
-"A" "1" 10
-"A" "2" .
-"B" "1" 30
-"B" "2" 50
-""  "1" 70
-"C" ""  90
+input id time sector x
+1 1 1 111
+1 1 2 112
+1 2 1 121
+1 2 2 122
+2 1 1 211
+2 1 2 212
+2 2 1 221
+2 2 2 222
 end
 
-pmean x if id != "C", id(id) time(time) replace
+pmean x, id(id) time(time) dim3(sector) replace
+local mode = r(mode)
+local dims = r(dimensions)
+local dim3 = r(dim3)
 
-assert pm_overall_x == 30 if id == "A" & time == "1"
-assert pm_idmean_x == 10 if id == "A"
-assert missing(pm_within_id_x) if id == "A" & time == "2"
-assert missing(pm_overall_x) if id == ""
-assert missing(pm_overall_x) if id == "C"
+assert abs(pm_overall_x - 166.5) < 1e-10
+assert abs(pm_idmean_x - 116.5) < 1e-10 if id == 1
+assert abs(pm_idmean_x - 216.5) < 1e-10 if id == 2
+assert abs(pm_timemean_x - 161.5) < 1e-10 if time == 1
+assert abs(pm_timemean_x - 171.5) < 1e-10 if time == 2
+assert abs(pm_dim3mean_x - 166) < 1e-10 if sector == 1
+assert abs(pm_dim3mean_x - 167) < 1e-10 if sector == 2
+assert abs(pm_between_dim3_x + 0.5) < 1e-10 if sector == 1
+assert abs(pm_between_dim3_x - 0.5) < 1e-10 if sector == 2
+assert abs(pm_threefe_x) < 1e-10
+assert `dims' == 3
+assert "`mode'" == "3D"
+assert "`dim3'" == "sector"
 
-pmean x if id != "C", id(id) time(time) genprefix(my_) replace
-confirm variable my_twfe_x
+*------------------------------------------------------------
+* 3. Full pairwise three-dimensional decomposition
+*------------------------------------------------------------
 
-* No nonmissing analysis values in the requested sample should fail
+pmean x, id(id) time(time) dim3(sector) full replace
+
+assert abs(pm_idtime_mean_x - 111.5) < 1e-10 if id == 1 & time == 1
+assert abs(pm_iddim3_mean_x - 116) < 1e-10 if id == 1 & sector == 1
+assert abs(pm_timedim3_mean_x - 161) < 1e-10 if time == 1 & sector == 1
+assert abs(pm_idtime_comp_x) < 1e-10
+assert abs(pm_iddim3_comp_x) < 1e-10
+assert abs(pm_timedim3_comp_x) < 1e-10
+assert abs(pm_threeway_x) < 1e-10
+
+* Summary table export in 3D mode
+tempfile pmtable
+pmean x, id(id) time(time) dim3(sector) table save(`pmtable') replace
+confirm file `pmtable'
+
+* Custom prefix
+pmean x, id(id) time(time) dim3(sector) genprefix(p2_) replace
+confirm variable p2_threefe_x
+
+*------------------------------------------------------------
+* 4. Missing identifiers are excluded from the command sample
+*------------------------------------------------------------
+
 clear
-input id time x
-1 1 .
-1 2 .
+input id time sector x
+1 1 1 10
+1 2 1 20
+. 1 1 30
+2 . 1 40
+2 2 . 50
 end
-capture noisily pmean x, id(id) time(time)
+
+pmean x, id(id) time(time) dim3(sector) replace
+
+assert abs(pm_overall_x - 15) < 1e-10 if !missing(id, time, sector)
+assert missing(pm_overall_x) if missing(id) | missing(time) | missing(sector)
+assert missing(pm_threefe_x) if missing(id) | missing(time) | missing(sector)
+
+* if restriction
+pmean x if id == 1, id(id) time(time) dim3(sector) genprefix(s_) replace
+assert abs(s_overall_x - 15) < 1e-10 if id == 1
+assert missing(s_overall_x) if id != 1
+
+*------------------------------------------------------------
+* 5. String identifiers and string third dimension
+*------------------------------------------------------------
+
+clear
+input str1 firm int year str1 sector double x
+"A" 2020 "M" 1
+"A" 2021 "M" 3
+"B" 2020 "S" 5
+"B" 2021 "S" 7
+end
+
+pmean x, id(firm) time(year) dim3(sector) replace
+assert abs(pm_overall_x - 4) < 1e-10
+assert abs(pm_idmean_x - 2) < 1e-10 if firm == "A"
+assert abs(pm_idmean_x - 6) < 1e-10 if firm == "B"
+assert !missing(pm_threefe_x)
+
+*------------------------------------------------------------
+* 6. No observations in sample
+*------------------------------------------------------------
+
+capture noisily pmean x if year < 1900, id(firm) time(year) dim3(sector) replace
 assert _rc == 2000
 
-display as text "pmean tests completed successfully."
+*------------------------------------------------------------
+* 7. Large-data smoke test
+*------------------------------------------------------------
+
+clear
+set obs 100000
+
+gen long id = floor((_n - 1)/20) + 1
+gen int time = mod(_n - 1, 10) + 1
+gen byte sector = mod(_n - 1, 5) + 1
+gen double x = id*0.01 + time + sector + runiform()
+gen double z = 2*x
+
+pmean x z, id(id) time(time) dim3(sector) replace
+local mode = r(mode)
+local dims = r(dimensions)
+assert `dims' == 3
+assert "`mode'" == "3D"
+assert !missing(pm_threefe_x) if !missing(x)
+assert !missing(pm_threefe_z) if !missing(z)
+
+* Keep a concise success message
+display as text "pmean 2.0.0 tests completed successfully."
