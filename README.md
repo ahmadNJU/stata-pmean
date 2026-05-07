@@ -49,12 +49,6 @@ Full pairwise three-dimensional decomposition:
 pmean lngsp, id(state) time(year) dim3(region) full genprefix(p2_) replace
 ```
 
-A complete demonstration with figures for each generated variable is provided in the file `pmean_demo.do` shipped with the package. After installation:
-
-```stata
-doedit pmean_demo.do
-```
-
 ## What's new in v2.0.1
 
 Version 2.0.1 is a documentation-and-quality release. It is fully backward compatible with v2.0.0: variable names, returned scalars, and existing do-files continue to work without modification.
