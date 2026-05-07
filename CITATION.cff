@@ -2,23 +2,22 @@ cff-version: 1.2.0
 message: "If you use this software, please cite the version used in your analysis."
 type: software
 title: "pmean: Stata command for panel means and decomposition"
-version: "2.0.0"
-date-released: "2026-04-28"
-
+version: "2.0.1"
+date-released: "2026-05-08"
 authors:
   - family-names: Nawaz
     given-names: Ahmad
     affiliation: "School of Economics, Nanjing University, Nanjing, China; Department of Economics, University of Sahiwal, Sahiwal, Pakistan"
-
+  - family-names: Zheng
+    given-names: Jianghuai
+    affiliation: "School of Economics, Nanjing University, Nanjing, China"
 repository-code: "https://github.com/ahmadNJU/stata-pmean"
 url: "https://github.com/ahmadNJU/stata-pmean"
 license: MIT
-
 identifiers:
   - type: url
-    value: "https://github.com/ahmadNJU/stata-pmean/releases/tag/v2.0.0"
-    description: "GitHub release page for version 2.0.0."
-
+    value: "https://github.com/ahmadNJU/stata-pmean/releases/tag/v2.0.1"
+    description: "GitHub release page for version 2.0.1."
 keywords:
   - Stata
   - panel data
@@ -27,5 +26,4 @@ keywords:
   - within-between decomposition
   - fixed effects
   - applied econometrics
-
-abstract: "pmean is a Stata command for computing panel means and performing within-between decomposition for applied panel data analysis. Version 2.0.0 supports both two-dimensional and three-dimensional panel data, adds third-dimension means and three-way decomposition, and includes optional full pairwise decomposition for three-dimensional panels."
+abstract: "pmean is a Stata command for computing panel means and performing within-between decomposition for applied panel data analysis. It supports both two-dimensional and three-dimensional panel data. Adds third-dimension means and three-way decomposition, and includes optional full pairwise decomposition for three-dimensional panels. Version 2.0.1 sharpens variable labels for clarity, adds an optional listwise sample option, detects nested third-dimension variables and prints an informational note. The release is fully backward compatible with version 2.0.0."

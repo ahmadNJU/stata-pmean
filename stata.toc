@@ -1,3 +1,5 @@
 v 3
-d pmean package
-p pmean Panel means and decomposition for two- and three-dimensional panel data
+d pmean - Stata command for two- and three-dimensional panel means and decomposition
+d Authors: Ahmad Nawaz and Jianghuai Zheng
+d Repository: https://github.com/ahmadNJU/stata-pmean
+p pmean
