@@ -1,7 +1,7 @@
 # pmean
 
 [![Stata](https://img.shields.io/badge/Stata-17%2B-blue)](https://www.stata.com/)
-[![Version](https://img.shields.io/badge/version-2.0.1-blue)](https://github.com/ahmadNJU/stata-pmean/releases)
+[![Version](https://img.shields.io/badge/version-2.0.2-blue)](https://github.com/ahmadNJU/stata-pmean/releases)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19752278.svg)](https://doi.org/10.5281/zenodo.19752278)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
@@ -55,9 +55,9 @@ A complete demonstration with figures for each generated variable is provided in
 doedit pmean_demo.do
 ```
 
-## What's new in v2.0.1
+## What's new in v2.0.2
 
-Version 2.0.1 is a documentation-and-quality release. It is fully backward compatible with v2.0.0: variable names, returned scalars, and existing do-files continue to work without modification.
+Version 2.0.2 is a documentation-and-quality release. It is fully backward compatible with v2.0.1: variable names, returned scalars, and existing do-files continue to work without modification.
 
 - Variable **labels** sharpened for clarity (variable **names** unchanged).
 - New `listwise` option that requires the variables in `varlist` to be jointly non-missing within the estimation sample.
@@ -80,7 +80,6 @@ After installation, type `help pmean` in Stata for the full reference, including
 | `pmean.sthlp` | Help file. |
 | `pmean.pkg` | Package descriptor. |
 | `stata.toc` | Table of contents for `net install`. |
-| `pmean_demo.do` | Demonstration do-file with figures (2D and 3D). |
 | `example.do` | Short usage examples. |
 | `tests.do` | Test suite. |
 | `CHANGELOG.md` | Version history. |
@@ -94,7 +93,7 @@ Jianghuai Zheng, School of Economics, Department of Industrial Economics, Nanjin
 
 ## Citation
 
-If you use `pmean` in your research, please cite the **specific version** you used so that your analysis is reproducible. For version 2.0.1:
+If you use `pmean` in your research, please cite the **specific version** you used so that your analysis is reproducible. For version 2.0.2:
 
 > Nawaz, A., & Zheng, J. (2026). *pmean: Stata command for panel means and decomposition* (Version 2.0.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20075556
 
