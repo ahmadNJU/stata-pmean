@@ -5,7 +5,7 @@
 *!                        Economics, Nanjing University, Nanjing 210093, China
 *!                        Department of Economics, University of Sahiwal,
 *!                        Sahiwal 57000, Pakistan
-*!                        ahmad.nawaz@uosahiwal.edu.pk
+*!                        ahmadnawaz@uosahiwal.edu.pk
 *!          Jianghuai Zheng  School of Economics, Department of Industrial
 *!                        Economics, Nanjing University, Nanjing 210093, China
 *!                        zhengjh@nju.edu.cn
