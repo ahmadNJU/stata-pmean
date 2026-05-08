@@ -17,8 +17,6 @@ An SSC-conformance and quality release. Fully backward compatible with 2.0.1: va
 - Shebang line revised to canonical SSC form: `*! pmean v2.0.2 ANAW-JZ 8may2026`.
 - Variable name validation now explicitly rejects names exceeding 32 characters with a clear error message before any variable is created.
 - Help-file examples updated: removed the redundant `gen lngsp = ln(gsp)` step from the productivity-panel examples (the `gsp` variable is already log-transformed in Stata's shipped dataset).
-- Author affiliations updated to authoritative form: "School of Economics, Department of Industrial Economics, Nanjing University, Nanjing 210093, China" and "Department of Economics, University of Sahiwal, Sahiwal 57000, Pakistan."
-- Co-author email corrected to `zhengjh@nju.edu.cn`.
 
 ### Documented
 
