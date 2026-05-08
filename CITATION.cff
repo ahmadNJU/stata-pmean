@@ -11,7 +11,7 @@ authors:
   - family-names: Zheng
     given-names: Jianghuai
     affiliation: "School of Economics, Nanjing University, Nanjing, China"
-doi: 10.5281/zenodo.20075556
+doi: 10.5281/zenodo.20079459
 repository-code: "https://github.com/ahmadNJU/stata-pmean"
 url: "https://github.com/ahmadNJU/stata-pmean"
 license: MIT
@@ -20,8 +20,8 @@ identifiers:
     value: 10.5281/zenodo.19752278
     description: "Concept DOI: always resolves to the latest version of pmean."
   - type: doi
-    value: 10.5281/zenodo.20075556
-    description: "DOI for this specific version (v2.0.1)."
+    value: 10.5281/zenodo.20079459
+    description: "DOI for this specific version (v2.0.2)."
   - type: url
     value: "https://github.com/ahmadNJU/stata-pmean/releases/tag/v2.0.2"
     description: "GitHub release page for version 2.0.2."
