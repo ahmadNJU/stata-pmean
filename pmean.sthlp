@@ -11,6 +11,7 @@
 {viewerjumpto "Stored results" "pmean##results"}{...}
 {viewerjumpto "References" "pmean##references"}{...}
 {viewerjumpto "Authors" "pmean##author"}{...}
+{viewerjumpto "Comparison with related commands" "pmean##comparison"}{...}
 {viewerjumpto "Also see" "pmean##alsosee"}{...}
 
 {title:Title}
@@ -342,28 +343,31 @@ SXXXXXX, Boston College Department of Economics.{p_end}
 {pstd}
 Version-pinned DOI: {browse "https://doi.org/10.5281/zenodo.20079459":10.5281/zenodo.20079459}{p_end}
 
-{marker alsosee}{...}
-{title:Also see}
-
-{p 4 14 2}
-Help: {manhelp xtreg XT}, {manhelp xtsum XT}, {manhelp xtdescribe XT},
-{manhelp egen D}, {manhelp pwmean R}; {helpb reghdfe} (if installed)
-{p_end}
+{marker comparison}{...}
+{title:Comparison with related commands}
 
 {pstd}
-{bf:Note on related Stata commands.} {cmd:pmean} is descriptive: it
-generates panel-data transformations (overall mean, unit and time means,
-within and between components, two-way and three-way fixed-effect residuals)
-and stores them as new variables. It does not perform statistical inference
-on differences in means.{p_end}
+{cmd:pmean} is descriptive: it generates panel-data transformations
+(overall mean, unit and time means, within and between components, two-way
+and three-way fixed-effect residuals) and stores them as new variables. It
+does not perform statistical inference on differences in means.
+{p_end}
 
 {pstd}
 For inferential pairwise comparisons of group means in cross-sectional
 data, see {manhelp pwmean R}, which computes all pairwise differences
 between group means under an equal-variance assumption and supports
 multiple-comparison adjustments such as Tukey's HSD, Bonferroni, and
-Dunnett.{p_end}
+Dunnett.
+{p_end}
 
 {pstd}
 For two-way and high-dimensional fixed-effects regression with proper inference, see {helpb reghdfe} (Correia 2016).
+{p_end}
+
+{marker alsosee}{...}
+{title:Also see}
+
+{p 4 14 2}
+Help: {manhelp xtreg XT}, {manhelp xtsum XT}, {manhelp xtdescribe XT}, {manhelp egen D}, {manhelp pwmean R}; {helpb reghdfe} (if installed)
 {p_end}
