@@ -1,7 +1,7 @@
 # pmean
 
 [![Stata](https://img.shields.io/badge/Stata-17%2B-blue)](https://www.stata.com/)
-[![Version](https://img.shields.io/badge/version-2.0.2-blue)](https://github.com/ahmadNJU/stata-pmean/releases)
+[![Version](https://img.shields.io/badge/version-2.0.1-blue)](https://github.com/ahmadNJU/stata-pmean/releases)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19752278.svg)](https://doi.org/10.5281/zenodo.19752278)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
@@ -35,19 +35,24 @@ xtset company year
 pmean invest mvalue, id(company) time(year) replace
 ```
 
-Three-dimensional panel data (Munnell public-capital panel):
+Three-dimensional panel data (Munnell public-capital panel; `gsp` is already log-transformed in this dataset):
 
 ```stata
 webuse productivity, clear
 xtset state year
-gen lngsp = ln(gsp)
-pmean lngsp, id(state) time(year) dim3(region) replace
+pmean gsp, id(state) time(year) dim3(region) replace
 ```
 
 Full pairwise three-dimensional decomposition:
 
 ```stata
-pmean lngsp, id(state) time(year) dim3(region) full genprefix(p2_) replace
+pmean gsp, id(state) time(year) dim3(region) full genprefix(p2_) replace
+```
+
+A complete demonstration with figures for each generated variable is provided in the file `pmean_demo.do` shipped with the package. After installation:
+
+```stata
+doedit pmean_demo.do
 ```
 
 ## What's new in v2.0.1
@@ -59,6 +64,9 @@ Version 2.0.1 is a documentation-and-quality release. It is fully backward compa
 - Informational note when `dim3()` is nested within `id()` (or vice versa). The id-by-dim3 interaction component is collinear with a main effect in that case; the additive identity still holds and `pmean` does not error.
 - Sharpened discussion of unbalanced panels in the help file. The three additive identities (2D, 3D main effects, and full 3-way ANOVA) hold *exactly* observation-by-observation in any panel; what fails in unbalanced panels is component orthogonality, the additive variance decomposition, and equivalence with the OLS residual from `reghdfe x, absorb(id time)`. Reference added to Wansbeek and Kapteyn (1989, *Journal of Econometrics* 41: 341-361).
 - Help-file examples updated to use built-in panel datasets (`webuse grunfeld`, `webuse productivity`) instead of fabricating panels from `sysuse auto`.
+- New demonstration do-file `pmean_demo.do` shipped with the package, with five figures for the two-dimensional run and five figures for the three-dimensional run, each illustrating a specific generated variable.
+- Edge-case behavior (single-id panels, single-period samples, nested third dimensions) documented in the help file.
+- Second author added: Jianghuai Zheng.
 
 ## Documentation
 
@@ -72,6 +80,7 @@ After installation, type `help pmean` in Stata for the full reference, including
 | `pmean.sthlp` | Help file. |
 | `pmean.pkg` | Package descriptor. |
 | `stata.toc` | Table of contents for `net install`. |
+| `pmean_demo.do` | Demonstration do-file with figures (2D and 3D). |
 | `example.do` | Short usage examples. |
 | `tests.do` | Test suite. |
 | `CHANGELOG.md` | Version history. |
@@ -79,15 +88,15 @@ After installation, type `help pmean` in Stata for the full reference, including
 
 ## Authors
 
-Ahmad Nawaz, School of Economics, Nanjing University, China; Department of Economics, University of Sahiwal, Pakistan.
+Ahmad Nawaz, School of Economics, Department of Industrial Economics, Nanjing University, Nanjing 210093, China; Department of Economics, University of Sahiwal, Sahiwal 57000, Pakistan.
 
-Jianghuai Zheng, School of Economics, Nanjing University, China.
+Jianghuai Zheng, School of Economics, Department of Industrial Economics, Nanjing University, Nanjing 210093, China.
 
 ## Citation
 
-If you use `pmean` in your research, please cite the **specific version** for reproduciblility. For version 2.0.2:
+If you use `pmean` in your research, please cite the **specific version** you used so that your analysis is reproducible. For version 2.0.1:
 
-> Nawaz, A., & Zheng, J. (2026). *pmean: Stata command for panel means and decomposition* (Version 2.0.2) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20075556
+> Nawaz, A., & Zheng, J. (2026). *pmean: Stata command for panel means and decomposition* (Version 2.0.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20075556
 
 All releases of `pmean` are also accessible through a single concept DOI that always resolves to the latest version: [10.5281/zenodo.19752278](https://doi.org/10.5281/zenodo.19752278). Use this one for general references where you do not need to pin a specific version.
 
