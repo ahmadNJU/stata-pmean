@@ -1,6 +1,6 @@
 /********************************************************************
   pmean example file
-  Version 2.0.1
+  Version 2.0.2
 ********************************************************************/
 
 clear all
@@ -48,7 +48,7 @@ pmean lngsp, id(state) time(year) dim3(region) table save(pmean_summary.csv) rep
 * Example 4: full pairwise three-dimensional decomposition
 *------------------------------------------------------------
 
-* Note: -region- nests -state-, so pmean v2.0.1 prints an
+* Note: -region- nests -state-, so pmean v2.0.2 prints an
 * informational note that the id-by-region interaction is
 * collinear with the between-region component.
 pmean lngsp, id(state) time(year) dim3(region) full genprefix(p2_) replace
