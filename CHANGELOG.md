@@ -12,8 +12,6 @@ A documentation-and-quality release. Fully backward compatible with 2.0.0.
 
 - New `listwise` option that requires the variables in `varlist` to be jointly non-missing within the estimation sample. By default, missingness is still handled per-variable.
 - Informational note when `dim3()` is nested within `id()` (or vice versa), warning that the id-by-dim3 interaction component is collinear with a main effect in that case. The additive identity still holds and `pmean` does not error.
-- New demonstration do-file `pmean_demo.do` shipped with the package. Uses `webuse productivity` (Munnell public-capital panel: 48 states x 17 years x 9 BEA regions, balanced) and produces five figures for the two-dimensional run and five for the three-dimensional run, each illustrating a specific generated variable.
-- Second author: Jianghuai Zheng (School of Economics, Nanjing University, China).
 
 ### Changed
 
