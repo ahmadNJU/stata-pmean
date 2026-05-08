@@ -340,7 +340,7 @@ and exact within-between decomposition}. Statistical Software Components
 SXXXXXX, Boston College Department of Economics.{p_end}
 
 {pstd}
-Version-pinned DOI: {browse "https://doi.org/10.5281/zenodo.20075556":10.5281/zenodo.20075556}{p_end}
+Version-pinned DOI: {browse "https://doi.org/10.5281/zenodo.20079459":10.5281/zenodo.20079459}{p_end}
 
 {marker alsosee}{...}
 {title:Also see}
