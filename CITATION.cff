@@ -11,10 +11,17 @@ authors:
   - family-names: Zheng
     given-names: Jianghuai
     affiliation: "School of Economics, Nanjing University, Nanjing, China"
+doi: 10.5281/zenodo.20075556
 repository-code: "https://github.com/ahmadNJU/stata-pmean"
 url: "https://github.com/ahmadNJU/stata-pmean"
 license: MIT
 identifiers:
+  - type: doi
+    value: 10.5281/zenodo.19752278
+    description: "Concept DOI: always resolves to the latest version of pmean."
+  - type: doi
+    value: 10.5281/zenodo.20075556
+    description: "DOI for this specific version (v2.0.1)."
   - type: url
     value: "https://github.com/ahmadNJU/stata-pmean/releases/tag/v2.0.1"
     description: "GitHub release page for version 2.0.1."
@@ -26,4 +33,4 @@ keywords:
   - within-between decomposition
   - fixed effects
   - applied econometrics
-abstract: "pmean is a Stata command for computing panel means and performing within-between decomposition for applied panel data analysis. It supports both two-dimensional and three-dimensional panel data. Adds third-dimension means and three-way decomposition, and includes optional full pairwise decomposition for three-dimensional panels. Version 2.0.1 sharpens variable labels for clarity, adds an optional listwise sample option, detects nested third-dimension variables and prints an informational note. The release is fully backward compatible with version 2.0.0."
+abstract: "pmean is a Stata command for computing panel means and performing within-between decomposition for applied panel data analysis. It supports both two-dimensional and three-dimensional panel data, adds third-dimension means and three-way decomposition, and includes optional full pairwise decomposition for three-dimensional panels. Version 2.0.1 sharpens variable labels for clarity, adds an optional listwise sample option, detects nested third-dimension variables and prints an informational note, and ships a demonstration do-file with figures. The release is fully backward compatible with version 2.0.0."
