@@ -72,7 +72,6 @@ After installation, type `help pmean` in Stata for the full reference, including
 | `pmean.sthlp` | Help file. |
 | `pmean.pkg` | Package descriptor. |
 | `stata.toc` | Table of contents for `net install`. |
-| `pmean_demo.do` | Demonstration do-file with figures (2D and 3D). |
 | `example.do` | Short usage examples. |
 | `tests.do` | Test suite. |
 | `CHANGELOG.md` | Version history. |
