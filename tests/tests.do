@@ -1,6 +1,6 @@
 /********************************************************************
   pmean test file
-  Version 2.0.1
+  Version 2.0.2
 ********************************************************************/
 
 version 17.0
@@ -289,4 +289,4 @@ assert abs(r(min))  < 1e-8
 drop ident_large
 
 * Keep a concise success message
-display as text "pmean 2.0.1: all 11 test blocks passed."
+display as text "pmean 2.0.2: all 11 test blocks passed."
