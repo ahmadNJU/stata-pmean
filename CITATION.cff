@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite the version used in your analysis."
 type: software
 title: "pmean: Stata command for panel means and decomposition"
-version: "2.0.1"
+version: "2.0.2"
 date-released: "2026-05-08"
 authors:
   - family-names: Nawaz
@@ -23,8 +23,8 @@ identifiers:
     value: 10.5281/zenodo.20075556
     description: "DOI for this specific version (v2.0.1)."
   - type: url
-    value: "https://github.com/ahmadNJU/stata-pmean/releases/tag/v2.0.1"
-    description: "GitHub release page for version 2.0.1."
+    value: "https://github.com/ahmadNJU/stata-pmean/releases/tag/v2.0.2"
+    description: "GitHub release page for version 2.0.2."
 keywords:
   - Stata
   - panel data
