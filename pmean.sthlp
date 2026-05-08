@@ -293,9 +293,7 @@ continue to work without modification.{p_end}
 {phang2}* New {cmd:listwise} option for a common sample across all variables.{p_end}
 {phang2}* Informational note when {cmd:dim3()} is nested within {cmd:id()} (or vice versa).{p_end}
 {phang2}* Sharpened discussion of unbalanced panels in the {help pmean##formulas:Formulas} section.{p_end}
-{phang2}* New demonstration do-file {bf:pmean_demo.do} shipped with the package.{p_end}
 {phang2}* Help-file examples updated to use built-in panel datasets.{p_end}
-{phang2}* Second author added: Jianghuai Zheng.{p_end}
 
 {marker author}{...}
 {title:Authors}
