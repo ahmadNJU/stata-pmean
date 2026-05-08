@@ -1,43 +1,39 @@
-*! version 2.0.1  08may2026  Ahmad Nawaz and Jianghuai Zheng
+*! pmean v2.0.2 ANAW-JZ 8may2026
+*! Panel-data means and exact within-between decomposition
+*! for two- and three-dimensional panel data.
+*! Authors: Ahmad Nawaz   School of Economics, Department of Industrial
+*!                        Economics, Nanjing University, Nanjing 210093, China
+*!                        Department of Economics, University of Sahiwal,
+*!                        Sahiwal 57000, Pakistan
+*!                        ahmad.nawaz@uosahiwal.edu.pk
+*!          Jianghuai Zheng  School of Economics, Department of Industrial
+*!                        Economics, Nanjing University, Nanjing 210093, China
+*!                        zhengjh@nju.edu.cn
+*!
+*! Repository: https://github.com/ahmadNJU/stata-pmean
+*! Concept DOI: 10.5281/zenodo.19752278
+*!
+*! Version history
+*!   2.0.2  8may2026  SSC-conformant edition: version requirement reduced to
+*!                    15.1; canonical shebang line; r(N), r(cmd), r(cmdline)
+*!                    returned; 32-character name validation; tested under
+*!                    -set varabbrev off-. No change to documented behavior or
+*!                    variable names.
+*!   2.0.1            sharpened variable labels; new -listwise- option;
+*!                    informational note on nested third dimension; sharpened
+*!                    discussion of unbalanced panels; updated examples.
+*!   2.0.0            three-dimensional decomposition introduced; -dim3()-,
+*!                    -full-, -table-, -save()- options.
 
 program define pmean, rclass sortpreserve
-    version 17.0
-
-    /*
-    --------------------------------------------------------------------
-    pmean: Panel means and within-between decomposition
-
-    Version 2.0.1 maintains full backward compatibility with v2.0.0.
-    All previously-generated variable NAMES are unchanged. This release:
-
-      * sharpens variable LABELS for clarity (names unchanged);
-      * adds an optional -listwise- option that requires the variables
-        in -varlist- to be jointly non-missing within the estimation
-        sample;
-      * detects when -dim3()- is nested within -id()- (or vice versa)
-        and prints an informational note that the corresponding
-        interaction component will be collinear with a main effect;
-      * sharpens the help-file's unbalanced-panel discussion: the
-        additive identities hold exactly observation-by-observation in
-        any panel; what fails in unbalanced data is component
-        orthogonality, the additive variance decomposition, and
-        equivalence with -reghdfe- residuals;
-      * ships a demonstration do-file (pmean_demo.do) with the package.
-
-    Authors:
-      Ahmad Nawaz       School of Economics, Nanjing University, China
-                        Department of Economics, University of Sahiwal,
-                        Pakistan
-      Jianghuai Zheng   School of Economics, Nanjing University, China
-
-    License: MIT
-    --------------------------------------------------------------------
-    */
+    version 15.1
 
     syntax varlist(numeric min=1) [if] [in], ///
         ID(varname) TIME(varname) ///
         [DIM3(varname) GENprefix(name) REPLACE TABLE SAVE(string asis) ///
          FULL PAIRwise LISTwise]
+
+    local cmdline `"pmean `0'"'
 
     if "`genprefix'" == "" {
         local genprefix "pm_"
@@ -48,7 +44,7 @@ program define pmean, rclass sortpreserve
     }
 
     local hasdim3 = ("`dim3'" != "")
-    local ndims = cond(`hasdim3', 3, 2)
+    local ndims   = cond(`hasdim3', 3, 2)
 
     *--- argument validation -----------------------------------------*
 
@@ -70,16 +66,6 @@ program define pmean, rclass sortpreserve
     }
 
     *--- estimation sample -------------------------------------------*
-    /*
-       marksample with novarlist excludes observations that are missing
-       on -id-, -time- (and -dim3- if specified) but does NOT require
-       the variables in -varlist- to be non-missing. Per-variable
-       missingness is handled inside each -egen- call.
-
-       The -listwise- option additionally restricts the sample to
-       observations with non-missing values for every variable in
-       -varlist-.
-    */
 
     tempvar touse
     marksample touse, novarlist
@@ -98,6 +84,7 @@ program define pmean, rclass sortpreserve
     if r(N) == 0 {
         error 2000
     }
+    local Nused = r(N)
 
     *--- save() / replace consistency --------------------------------*
 
@@ -110,22 +97,13 @@ program define pmean, rclass sortpreserve
         capture confirm new file `save'
         if _rc {
             local rc = _rc
-            display as error "output file cannot be created. Specify replace if the file already exists."
+            display as error "output file cannot be created. " ///
+                "Specify replace if the file already exists."
             exit `rc'
         }
     }
 
     *--- detect nested dim3 (informational note only) ----------------*
-    /*
-       If -dim3- is constant within each -id- (e.g., -region- nests
-       -state-), then for every observation
-            pm_iddim3_mean_x = pm_idmean_x
-       and  pm_iddim3_comp_x = -pm_between_dim3_x.
-       The decomposition still satisfies the additive identity, but
-       the id-by-dim3 interaction is not a true interaction; it is
-       collinear with the between-dim3 main effect. We emit a note,
-       not an error, because the computation is still valid.
-    */
 
     if `hasdim3' {
         quietly {
@@ -198,28 +176,42 @@ program define pmean, rclass sortpreserve
         }
 
         foreach newvar of local newvars {
+
+            if length("`newvar'") > 32 {
+                display as error ///
+                    "generated variable name `newvar' exceeds 32 characters."
+                display as error ///
+                    "Use a shorter genprefix() or rename `var'."
+                exit 198
+            }
+
             capture confirm name `newvar'
             if _rc {
-                display as error "generated variable name `newvar' is invalid or too long."
-                display as error "Use a shorter genprefix() or rename `var'."
+                display as error ///
+                    "generated variable name `newvar' is invalid."
+                display as error ///
+                    "Use a shorter genprefix() or rename `var'."
                 exit 198
             }
 
             if "`newvar'" == "`id'" | "`newvar'" == "`time'" | ///
                ("`dim3'" != "" & "`newvar'" == "`dim3'") {
-                display as error "generated variable name `newvar' conflicts with an identifier variable."
+                display as error ///
+                    "generated variable name `newvar' conflicts with an identifier variable."
                 exit 198
             }
 
             if strpos(" `varlist' ", " `newvar' ") {
-                display as error "generated variable name `newvar' conflicts with an input variable."
+                display as error ///
+                    "generated variable name `newvar' conflicts with an input variable."
                 exit 198
             }
 
             if "`replace'" == "" {
                 capture confirm new variable `newvar'
                 if _rc {
-                    display as error "`newvar' already exists. Use option replace to overwrite."
+                    display as error ///
+                        "`newvar' already exists. Use option replace to overwrite."
                     exit 110
                 }
             }
@@ -234,9 +226,12 @@ program define pmean, rclass sortpreserve
     }
 
     if c(k) + `toadd' > c(maxvar) {
-        display as error "not enough variable slots are available for the requested output."
-        display as error "Current variables: " c(k) "; new variables needed: `toadd'; maxvar: " c(maxvar)
-        display as error "Use fewer input variables, omit full, or increase maxvar if your Stata edition allows it."
+        display as error ///
+            "not enough variable slots are available for the requested output."
+        display as error ///
+            "Current variables: " c(k) "; new variables needed: `toadd'; maxvar: " c(maxvar)
+        display as error ///
+            "Use fewer input variables, omit full, or increase maxvar if your Stata edition allows it."
         exit 900
     }
 
@@ -249,22 +244,6 @@ program define pmean, rclass sortpreserve
     }
 
     *--- generate variables ------------------------------------------*
-    /*
-       Notes on -egen ... if touse-:
-       Within a -by- block, "by g: egen y = mean(x) if touse" computes
-       the within-group mean using only observations with touse==1 and
-       leaves all other observations missing on -y-. This is the
-       intended behavior: generated variables are missing outside the
-       command sample.
-
-       Edge cases:
-         * If a unit has only one observation in the sample, its
-           pm_within_id_x is identically 0.
-         * If only one period is observed in the sample,
-           pm_between_time_x is identically 0.
-         * If -dim3- is nested in -id-, the warning above already fires
-           and the iddim3 interaction is degenerate.
-    */
 
     quietly {
 
@@ -429,26 +408,13 @@ program define pmean, rclass sortpreserve
                 local ngroups3 = r(N)
 
                 post `results' ///
-                    ("`var'") ///
-                    (`N') ///
-                    (`mean') ///
-                    (`sd') ///
-                    (`min') ///
-                    (`max') ///
-                    (`npanels') ///
-                    (`nperiods') ///
-                    (`ngroups3')
+                    ("`var'") (`N') (`mean') (`sd') (`min') (`max') ///
+                    (`npanels') (`nperiods') (`ngroups3')
             }
             else {
                 post `results' ///
-                    ("`var'") ///
-                    (`N') ///
-                    (`mean') ///
-                    (`sd') ///
-                    (`min') ///
-                    (`max') ///
-                    (`npanels') ///
-                    (`nperiods')
+                    ("`var'") (`N') (`mean') (`sd') (`min') (`max') ///
+                    (`npanels') (`nperiods')
             }
         }
 
@@ -493,14 +459,17 @@ program define pmean, rclass sortpreserve
 
     local created_vars : list retokenize created_vars
 
-    return local varlist "`varlist'"
-    return local id "`id'"
-    return local time "`time'"
-    return local dim3 "`dim3'"
-    return local prefix "`genprefix'"
+    return local cmd       "pmean"
+    return local cmdline   `"`cmdline'"'
+    return local varlist   "`varlist'"
+    return local id        "`id'"
+    return local time      "`time'"
+    return local dim3      "`dim3'"
+    return local prefix    "`genprefix'"
     return local generated "`created_vars'"
-    return local mode "`ndims'D"
+    return local mode      "`ndims'D"
     return scalar dimensions = `ndims'
+    return scalar N        = `Nused'
 
     foreach var of varlist `varlist' {
         return scalar overall_`var' = `overall_`var''

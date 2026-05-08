@@ -1,15 +1,17 @@
 v 3
-d pmean - Stata command for two- and three-dimensional panel means and decomposition
-d Version: 2.0.1
+d pmean - Stata module for panel-data means and exact within-between decomposition
+d Version: 2.0.2
 d Authors: Ahmad Nawaz; Jianghuai Zheng
 d Affiliations: Nanjing University; University of Sahiwal
 d Repository: https://github.com/ahmadNJU/stata-pmean
 d
-d Generates marginal means and within-between decomposition components for
-d two-dimensional and (with dim3) three-dimensional panel data. Optional
-d -full- option produces the full ANOVA-style decomposition with pairwise
-d interaction components and a three-way residual.
+d Computes panel-data means and the exact within-between decomposition for
+d two-dimensional (id x time) and three-dimensional (id x time x dim3) panels.
+d The additive identities are exact at every observation in any panel,
+d balanced or unbalanced. Optional -full- option produces the full ANOVA-style
+d decomposition with pairwise interaction components and a three-way residual.
+d
+d Requires: Stata version 15.1
 d
 f pmean.ado
 f pmean.sthlp
-f pmean_demo.do

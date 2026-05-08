@@ -1,5 +1,5 @@
 v 3
-d pmean - Stata command for two- and three-dimensional panel means and decomposition
+d pmean - Stata module for panel-data means and exact within-between decomposition
 d Authors: Ahmad Nawaz and Jianghuai Zheng
 d Repository: https://github.com/ahmadNJU/stata-pmean
 p pmean
