@@ -365,6 +365,5 @@ multiple-comparison adjustments such as Tukey's HSD, Bonferroni, and
 Dunnett.{p_end}
 
 {pstd}
-For two-way and high-dimensional fixed-effects regression with proper
-inference, see {helpb reghdfe} (Correia 2016).
+For two-way and high-dimensional fixed-effects regression with proper inference, see {helpb reghdfe} (Correia 2016).
 {p_end}
