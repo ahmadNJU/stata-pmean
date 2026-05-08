@@ -58,7 +58,6 @@ Version 2.0.2 is a documentation-and-quality release. It is fully backward compa
 - Informational note when `dim3()` is nested within `id()` (or vice versa). The id-by-dim3 interaction component is collinear with a main effect in that case; the additive identity still holds and `pmean` does not error.
 - Sharpened discussion of unbalanced panels in the help file. The three additive identities (2D, 3D main effects, and full 3-way ANOVA) hold *exactly* observation-by-observation in any panel; what fails in unbalanced panels is component orthogonality, the additive variance decomposition, and equivalence with the OLS residual from `reghdfe x, absorb(id time)`. Reference added to Wansbeek and Kapteyn (1989, *Journal of Econometrics* 41: 341-361).
 - Help-file examples updated to use built-in panel datasets (`webuse grunfeld`, `webuse productivity`) instead of fabricating panels from `sysuse auto`.
-- New demonstration do-file `pmean_demo.do` shipped with the package, with five figures for the two-dimensional run and five figures for the three-dimensional run, each illustrating a specific generated variable.
 - Edge-case behavior (single-id panels, single-period samples, nested third dimensions) documented in the help file.
 - Second author added: Jianghuai Zheng.
 
@@ -89,7 +88,7 @@ Jianghuai Zheng, School of Economics, Department of Industrial Economics, Nanjin
 
 If you use `pmean` in your research, please cite the **specific version** you used so that your analysis is reproducible. For version 2.0.2:
 
-> Nawaz, A., & Zheng, J. (2026). *pmean: Stata command for panel means and decomposition* (Version 2.0.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20075556
+> Nawaz, A., & Zheng, J. (2026). *pmean: Stata command for panel means and decomposition* (Version 2.0.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20079459
 
 All releases of `pmean` are also accessible through a single concept DOI that always resolves to the latest version: [10.5281/zenodo.19752278](https://doi.org/10.5281/zenodo.19752278). Use this one for general references where you do not need to pin a specific version.
 
