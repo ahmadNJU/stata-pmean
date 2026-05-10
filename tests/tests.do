@@ -11,7 +11,6 @@
       are populated.
 
   Run from inside the repo as:  do tests/tests.do
-  Successful run ends with: "pmean 2.0.2: all 12 test blocks passed."
 ********************************************************************/
 
 version 15.1
@@ -222,8 +221,6 @@ assert missing(pm_overall_y) if id == 1 & time == 2
 
 *------------------------------------------------------------
 * 8. Nested dim3 detection (informational note)
-*    -- should not error; computation should still satisfy
-*       the additive identity.
 *------------------------------------------------------------
 
 clear
@@ -261,7 +258,6 @@ drop check_nest
 
 *------------------------------------------------------------
 * 9. Numeric ids derived from string variables
-*    (the canonical Stata workflow: encode strings before xtset)
 *------------------------------------------------------------
 
 clear
